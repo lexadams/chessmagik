@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Create the board
+        #region First
+        //create Board
         mBoard.Create();
+
+        mPieceManager.Setup(mBoard);
+        #endregion
     }
 }

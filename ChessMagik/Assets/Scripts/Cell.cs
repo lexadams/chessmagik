@@ -21,11 +21,14 @@ public class Cell : MonoBehaviour
         mBoard = newBoard;
 
         mRectTransform = GetComponent<RectTransform>();
-
     }
 
     public void RemovePiece()
     {
+        if (mCurrentPiece != null)
+        {
+            mCurrentPiece.Kill();
+        }
 
     }
 }
