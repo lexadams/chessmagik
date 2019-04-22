@@ -39,6 +39,7 @@ public abstract class BasePiece : EventTrigger
         //Object
         transform.position = newCell.transform.position;
         gameObject.SetActive(true);
+        
     }
 
     public void Reset()
