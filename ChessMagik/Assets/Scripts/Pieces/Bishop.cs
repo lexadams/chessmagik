@@ -8,6 +8,6 @@ public class Bishop : BasePiece
         base.Setup(newTeamColor, newSpriteColor, newPieceManager);
 
         mMovement = new Vector3Int(0, 0, 7);
-        GetComponent<Image>().sprite = Resources.Load<Sprite>("T_Bishop");
+        GetComponent<Image>().sprite = Resources.Load<Sprite>("bishop_light");
     }
 }

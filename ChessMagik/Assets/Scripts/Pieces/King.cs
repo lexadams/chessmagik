@@ -11,13 +11,13 @@ public class King : BasePiece
         base.Setup(newTeamColor, newSpriteColor, newPieceManager);
 
         mMovement = new Vector3Int(1, 1, 1);
-        GetComponent<Image>().sprite = Resources.Load<Sprite>("T_King");
+        GetComponent<Image>().sprite = Resources.Load<Sprite>("king_light");
     }
 
     public override void Kill()
     {
-        base.Kill();
-        mPieceManager.mIsKingAlive = false;
+        base.Reset();
+        mIsFirstMove = true;
     }
 
     protected override void CheckPathing()

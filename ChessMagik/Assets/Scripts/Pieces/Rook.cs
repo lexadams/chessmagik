@@ -12,7 +12,7 @@ public class Rook : BasePiece
         base.Setup(newTeamColor, newSpriteColor, newPieceManager);
 
         mMovement = new Vector3Int(7, 7, 0);
-        GetComponent<Image>().sprite = Resources.Load<Sprite>("T_Rook");
+        GetComponent<Image>().sprite = Resources.Load<Sprite>("rook_light");
     }
     
     public override void Place(Cell newCell)

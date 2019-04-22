@@ -7,7 +7,7 @@ public class Knight : BasePiece
     {
         base.Setup(newTeamColor, newSpriteColor, newPieceManager);
 
-        GetComponent<Image>().sprite = Resources.Load<Sprite>("T_Knight");
+        GetComponent<Image>().sprite = Resources.Load<Sprite>("knight_light");
   
     }
 

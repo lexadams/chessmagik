@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 498}
+  m_MinSize: {x: 950, y: 474}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1366
     height: 685
-  m_MinSize: {x: 950, y: 498}
+  m_MinSize: {x: 950, y: 474}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -113,10 +113,10 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 635
-  m_MinSize: {x: 913, y: 448}
-  m_MaxSize: {x: 22008, y: 10024}
+  m_MinSize: {x: 917, y: 424}
+  m_MaxSize: {x: 22012, y: 10024}
   vertical: 0
-  controlID: 4433
+  controlID: 432
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -138,10 +138,10 @@ MonoBehaviour:
     y: 0
     width: 608
     height: 635
-  m_MinSize: {x: 202, y: 448}
-  m_MaxSize: {x: 4002, y: 8048}
+  m_MinSize: {x: 202, y: 424}
+  m_MaxSize: {x: 4002, y: 8024}
   vertical: 1
-  controlID: 4395
+  controlID: 379
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -460,9 +460,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 26080000
+      m_SelectedIDs: 860d0000
       m_LastClickedID: 0
-      m_ExpandedIDs: d8e1fffffee1ffffceecffffe6eeffff16f9ffff1ef9ffff6af9fffffcfaffff3afbffffd6fbffff902f0000523000005c330000
+      m_ExpandedIDs: 10f3ffff3ef3ffff6cf3ffff9ef3ffff2cfbffffd6fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -524,20 +524,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\tuoyo\Desktop\cam\chessmagik\ChessMagik
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 760c0000
-    m_LastClickedID: 3190
-    m_ExpandedIDs: 000000002c0a0000080b0000760c00009e0c0000d62b0000d82b0000da2b0000dc2b0000de2b0000e02b0000e22b0000e42b0000e62b0000e82b000000ca9a3b
+    m_SelectedIDs: 060d0000
+    m_LastClickedID: 3334
+    m_ExpandedIDs: 000000002c0a0000180b0000980c0000b20c0000ca0c0000fa2a0000fc2a0000fe2a0000002b0000022b0000042b0000062b0000082b00000a2b00000c2b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -565,7 +565,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002c0a0000080b0000760c0000880c00009e0c0000d62b0000d82b0000da2b0000dc2b0000de2b0000e02b0000e22b0000e42b0000e62b0000e82b000000ca9a3b
+    m_ExpandedIDs: 000000002c0a0000180b0000980c0000b20c0000ca0c0000fa2a0000fc2a0000fe2a0000002b0000022b0000042b0000062b0000082b00000a2b00000c2b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: e62a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

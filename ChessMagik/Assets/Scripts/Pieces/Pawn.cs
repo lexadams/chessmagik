@@ -13,7 +13,7 @@ public class Pawn : BasePiece
 
 
         mMovement = mColor == Color.white ? new Vector3Int(0, 1, 1) : new Vector3Int(0, -1, -1);
-        GetComponent<Image>().sprite = Resources.Load<Sprite>("T_Pawn");
+        GetComponent<Image>().sprite = Resources.Load<Sprite>("white_piece");
 
     }
 

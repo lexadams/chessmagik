@@ -8,6 +8,6 @@ public class Queen : BasePiece
         base.Setup(newTeamColor, newSpriteColor, newPieceManager);
 
         mMovement = new Vector3Int(7, 7, 7);
-        GetComponent<Image>().sprite = Resources.Load<Sprite>("T_Queen");
+        GetComponent<Image>().sprite = Resources.Load<Sprite>("queen_light");
     }
 }
