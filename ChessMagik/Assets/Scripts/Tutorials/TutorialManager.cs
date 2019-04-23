@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class TutorialManager : MonoBehaviour
     public List<Tutorial> Tutorials = new List<Tutorial>();
 
     public Text explanationTxt;
-
+    private bool tutorialsComplete = false;
     private static TutorialManager instance;
     public static TutorialManager Instance
     {
@@ -41,6 +42,11 @@ public class TutorialManager : MonoBehaviour
     {
         if (currentTutorial)
             currentTutorial.CheckIfHappening();
+        if (tutorialsComplete)
+        {
+            if (Input.GetKeyDown("a"))
+                SceneManager.LoadScene("mainMenu");
+        }
     }
 
     public void CompletedTutorial()
@@ -63,9 +69,11 @@ public class TutorialManager : MonoBehaviour
 
     public void CompletedAllTutorials()
     {
-        explanationTxt.text = "You Completed all the Tutorials";
-
-        //go back to home menu
+        explanationTxt.text = "You Completed all the Tutorials, press \"a\" to return home";
+        tutorialsComplete = true;
+        
+        
+        
     }
 
     public Tutorial GetTutorialByOrder(int Order)

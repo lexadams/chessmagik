@@ -16,7 +16,7 @@ public class King : BasePiece
 
     public override void Kill()
     {
-        base.Reset();
+        Reset();
         mIsFirstMove = true;
     }
 

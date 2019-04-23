@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public abstract class BasePiece : EventTrigger
 {
@@ -43,10 +44,10 @@ public abstract class BasePiece : EventTrigger
 
     public void Reset()
     {
-        Kill();
+        //Kill();
 
         mIsFirstMove = true;
-
+        SceneManager.LoadScene("mainMenu");
         Place(mOriginalCell);
     }
 
