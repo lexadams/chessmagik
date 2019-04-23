@@ -12,6 +12,7 @@ public class PieceManager : MonoBehaviour
     private List<BasePiece> mWhitePieces = null;
     private List<BasePiece> mBlackPieces = null;
     private List<BasePiece> mPromotedPieces = new List<BasePiece>();
+    private bool aiActive = false;
 
     private string[] mPieceOrder = new string[16]
     {
@@ -31,61 +32,54 @@ public class PieceManager : MonoBehaviour
 
     public void Setup(Board board)
     {
-        //White pieces
-        mWhitePieces = CreatePieces(Color.white, new Color32(80, 124, 159, 255), board);
+        // Create white pieces
+        mWhitePieces = CreatePieces(Color.white, new Color32(80, 124, 159, 255));
 
-        //black pieces
-        mBlackPieces = CreatePieces(Color.black, new Color32(210, 95, 64, 255), board);
+        // Create place pieces
+        mBlackPieces = CreatePieces(Color.black, new Color32(210, 95, 64, 255));
 
-        //Place pieces
+        // Place pieces
         PlacePieces(1, 0, mWhitePieces, board);
         PlacePieces(6, 7, mBlackPieces, board);
 
-
+        // White goes first
         SwitchSides(Color.black);
-        //white goes first
-        //switch sides()
     }
 
-    private List<BasePiece> CreatePieces(Color teamColor, Color32 spriteColor, Board board)
+    private List<BasePiece> CreatePieces(Color teamColor, Color32 spriteColor)
     {
         List<BasePiece> newPieces = new List<BasePiece>();
 
-        for(int i = 0; i < mPieceOrder.Length; i++)
+        for (int i = 0; i < mPieceOrder.Length; i++)
         {
-            //create new object
-            GameObject newPieceObject = Instantiate(mPiecePrefab);
-            newPieceObject.transform.SetParent(transform);
-
-            //set scale+position
-            newPieceObject.transform.localScale = new Vector3(1, 1, 1);
-            newPieceObject.transform.localRotation = Quaternion.identity;
-
-            //get the type, apply to new object
+            // Get the type
             string key = mPieceOrder[i];
             Type pieceType = mPieceLibrary[key];
 
-            //Store new piece
-            BasePiece newPiece = (BasePiece)newPieceObject.AddComponent(pieceType);
+            // Create
+            BasePiece newPiece = CreatePiece(pieceType);
             newPieces.Add(newPiece);
 
-            //Setup piece
+            // Setup
             newPiece.Setup(teamColor, spriteColor, this);
         }
-            return newPieces;
+
+        return newPieces;
     }
 
     private BasePiece CreatePiece(Type pieceType)
     {
-        //create new object
+        // Create new object
         GameObject newPieceObject = Instantiate(mPiecePrefab);
         newPieceObject.transform.SetParent(transform);
 
-        //set scale+position
+        // Set scale and position
         newPieceObject.transform.localScale = new Vector3(1, 1, 1);
         newPieceObject.transform.localRotation = Quaternion.identity;
 
+        // Store new piece
         BasePiece newPiece = (BasePiece)newPieceObject.AddComponent(pieceType);
+
         return newPiece;
     }
 
@@ -93,9 +87,10 @@ public class PieceManager : MonoBehaviour
     {
         for (int i = 0; i < 8; i++)
         {
-            //Pawns
+            // Place pawns    
             pieces[i].Place(board.mAllCells[i, pawnRow]);
-            //Royalty
+
+            // Place royalty
             pieces[i + 8].Place(board.mAllCells[i, royaltyRow]);
         }
     }
@@ -106,22 +101,56 @@ public class PieceManager : MonoBehaviour
             piece.enabled = value;
     }
 
+    private void MoveRandomPiece()
+    {
+        BasePiece finalPiece = null;
+
+        while (!finalPiece)
+        {
+            // Get piece
+            int i = UnityEngine.Random.Range(0, mBlackPieces.Count);
+            BasePiece newPiece = mBlackPieces[i];
+
+            // Does this piece have any moves?
+            if (!newPiece.HasMove())
+                continue;
+
+            // Is piece active?
+            if (newPiece.gameObject.activeInHierarchy)
+                finalPiece = newPiece;
+        }
+
+        finalPiece.ComputerMove();
+    }
+
+    public void OnClick()
+    {
+        aiActive = !aiActive;
+    }
+
     public void SwitchSides(Color color)
     {
         if (!mIsKingAlive)
         {
+            // Reset pieces
             ResetPieces();
 
+            // King has risen from the dead
             mIsKingAlive = true;
+
+            // Change color to black, so white can go first again
             color = Color.black;
         }
 
         bool isBlackTurn = color == Color.white ? true : false;
 
+        // Set team interactivity
         SetInteractive(mWhitePieces, !isBlackTurn);
-        SetInteractive(mBlackPieces, isBlackTurn);
-        ///Set promoted interactivity
-        
+
+        // Disable this so player can't move pieces
+        // SetInteractive(mBlackPieces, isBlackTurn);
+
+        // Set promoted interactivity
         foreach (BasePiece piece in mPromotedPieces)
         {
             bool isBlackPiece = piece.mColor != Color.white ? true : false;
@@ -129,16 +158,22 @@ public class PieceManager : MonoBehaviour
 
             piece.enabled = isPartOfTeam;
         }
+
+        // ADDED: Move random piece
+        if (aiActive && isBlackTurn)
+            MoveRandomPiece();
     }
 
     public void ResetPieces()
     {
-        foreach(BasePiece piece in mPromotedPieces)
+        foreach (BasePiece piece in mPromotedPieces)
         {
             piece.Kill();
-
             Destroy(piece.gameObject);
         }
+
+        mPromotedPieces.Clear();
+
         foreach (BasePiece piece in mWhitePieces)
             piece.Reset();
 
@@ -148,13 +183,17 @@ public class PieceManager : MonoBehaviour
 
     public void PromotePiece(Pawn pawn, Cell cell, Color teamColor, Color spriteColor)
     {
+        // Kill Pawn
         pawn.Kill();
 
+        // Create
         BasePiece promotedPiece = CreatePiece(typeof(Queen));
         promotedPiece.Setup(teamColor, spriteColor, this);
 
+        // Place piece
         promotedPiece.Place(cell);
 
+        // Add
         mPromotedPieces.Add(promotedPiece);
     }
 }
