@@ -22,12 +22,15 @@ public class Cell : MonoBehaviour
 
         mRectTransform = GetComponent<RectTransform>();
     }
-
+    AudioSource audioData;
     public void RemovePiece()
     {
+        
         if (mCurrentPiece != null)
         {
             mCurrentPiece.Kill();
+            audioData = GetComponent<AudioSource>();
+            audioData.Play();
         }
 
     }
